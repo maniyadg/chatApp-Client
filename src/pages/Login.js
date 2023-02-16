@@ -18,11 +18,6 @@ export default function Login() {
     draggable: true,
     theme: "dark",
   };
-  useEffect(() => {
-    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
-      navigate("/");
-    }
-  }, []);
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -46,7 +41,7 @@ export default function Login() {
       console.log(response.data)
       if (response) {
         alert('Login Sucessfully')
-        navigate("/");
+        navigate("/chat");
       }
       if (response.data.status === false) {
         toast.error(response.msg, toastOptions);
