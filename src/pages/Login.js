@@ -37,7 +37,8 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-      const response = await axios.post(loginRoute, values,{withCredentials: true});
+    if (validateForm()) {
+      const response = await axios.post(loginRoute, values, { withCredentials: true });
       console.log(response.data)
       if (response) {
         alert('Login Sucessfully')
@@ -46,7 +47,7 @@ export default function Login() {
       if (response.data.status === false) {
         toast.error(response.msg, toastOptions);
       }
-
+    }
   };
 
   return (
