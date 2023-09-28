@@ -42,7 +42,7 @@ export default function Login() {
       console.log(response.data)
       if (response) {
         alert('Login Sucessfully')
-        localStorage.setItem( "token" , JSON.stringify(res.data))
+        localStorage.setItem( "token" , JSON.stringify(response.data))
         navigate("/chat");
       }
       if (response.data.status === false) {
