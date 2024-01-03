@@ -44,15 +44,17 @@ export default function ChatContainer({ currentChat, socket }) {
   const handleSendMsg = async (msg) => {
     const data = await axios.get(allUsersRoute,{withCredentials: true});
     const user = data.data.user
-    socket.current.emit("send-msg", {
-      to: currentChat._id,
-      from: user._id,
-      msg,
-    });
+
     await axios.post(sendMessageRoute, {
       from: user._id,
       to: currentChat._id,
       message: msg,
+    });
+
+    socket.current.emit("send-msg", {
+      to: currentChat._id,
+      from: user._id,
+      msg,
     });
 
     const msgs = [...messages];
