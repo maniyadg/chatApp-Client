@@ -13,7 +13,7 @@ export default function Logout() {
     const response = await axios.get(logoutRoute, {userCredentials: true});
     if(response){
         removeCookie('accessToken');
-        navigate('/login')
+        navigate('/')
     }
   };
   return (
