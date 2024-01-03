@@ -63,12 +63,13 @@ export default function ChatContainer({ currentChat, socket }) {
   };
 
   useEffect(() => {
-    if (socket.current) {
-      socket.current.on("msg-recieve", (msg) => {
-        setArrivalMessage({ fromSelf: false, message: msg });
-      });
+    const listener = msg => {
+      setArrivalMessage({ fromSelf: false, message: msg });
     }
-  }, []);
+    console.log("set")
+      socket.current.on("msg-recieve",listener );
+      return () => socket.current.off('msg-receive', listener);
+  });
 
   useEffect(() => {
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
